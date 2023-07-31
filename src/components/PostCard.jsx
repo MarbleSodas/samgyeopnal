@@ -40,7 +40,7 @@ export default function PostCard({ post, handleTagClick, handleEdit, handleDelet
                             </h3>
                     </div>
                 </div>
-                {/* Change to like button */}
+                {/* Change to share button */}
                 <div className='copy_btn' onClick={handleCopy}>
                     <Image 
                         src={copied === post.recipe
