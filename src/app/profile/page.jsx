@@ -32,6 +32,10 @@ export default function MyProfile() {
         }
     }
 
+    const handleUsername = () => {
+        router.push('/change-username')
+    }
+
     const fetchPosts = async () => {
         const res = await fetch(`/api/users/${session?.user.id}/posts`);
         const data = await res.json(); 
@@ -50,6 +54,7 @@ export default function MyProfile() {
             data={posts}
             handleEdit={handleEdit}
             handleDelete={handleDelete}
+            handleUsername={handleUsername}
         />
     )
 }

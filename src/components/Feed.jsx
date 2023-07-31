@@ -17,12 +17,22 @@ const PostCardList = ({ data, handleTagClick }) => {
 }
 
 export default function Feed() {
-    const [searchText, setSearchText] = useState('');
+    const [searchText, setSearchText] = useState("");
+    const [searchTimeout, setSearchTimeout] = useState(null);
+    const [searchedResults, setSearchedResults] = useState([]);
     const [posts, setPosts] = useState([]);
 
     const handleSearchChange = (e) => {
-
-    }
+        clearTimeout(searchTimeout);
+        setSearchText(e.target.value);
+    
+        setSearchTimeout(
+          setTimeout(() => {
+            const searchResult = filterPrompts(e.target.value);
+            setSearchedResults(searchResult);
+          }, 500)
+        );
+      };
 
     const fetchPosts = async () => {
         const res = await fetch('/api/post');
@@ -31,6 +41,24 @@ export default function Feed() {
         setPosts(data);
     } 
 
+    const filterPrompts = (searchtext) => {
+        const regex = new RegExp(searchtext, "i");
+        return posts.filter(
+          (item) =>
+            regex.test(item.creator.username) ||
+            regex.test(item.tag) ||
+            regex.test(item.prompt)
+        );
+      };
+
+    const handleTagClick = (tagName) => {
+    setSearchText(tagName);
+
+    const searchResult = filterPrompts(tagName);
+    setSearchedResults(searchResult);
+    };
+    
+    
     useEffect(() => {
         fetchPosts();
     },[])
@@ -41,10 +69,14 @@ export default function Feed() {
                 <input type='text' placeholder='Search for a tag or username' value={searchText} onChange={handleSearchChange} required className='search_input peer'/>
             </form>
             
-            <PostCardList
-            data={posts}
-            handleTagClick={() => {}}
-            />
+            {searchText ? (
+                <PostCardList
+                data={searchedResults}
+                handleTagClick={handleTagClick}
+                />
+            ) : (
+                <PostCardList data={posts} handleTagClick={handleTagClick} />
+            )}
         </section>
     )
 }
