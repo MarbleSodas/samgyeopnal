@@ -8,8 +8,7 @@ export default function Home() {
         <h1>Gyeop</h1>
         <h1>Nal</h1>
       </div>
-      <p className="desc text-center">Samgyeopnal is a place to rediscover, explore, and share home recipes</p>
-
+      <p className="text-3xl blue_gradient font-bold pt-10 text-center">Rediscover, Learn and Share Home Recipes</p>
       <Feed />
     </section>
   );
