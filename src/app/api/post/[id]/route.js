@@ -47,8 +47,6 @@ export const PATCH = async (request, { params }) => {
             status: 500
         })
     }
-
-
 }
 
 export const DELETE = async (request, { params }) => {
