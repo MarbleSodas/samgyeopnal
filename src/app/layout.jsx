@@ -13,6 +13,13 @@ export default function RootLayout({
 
   return (
     <html lang="en">
+      <head>
+        <link
+          rel="icon"
+          href="assets/images/logo_bg.svg"
+          type="image/svg"
+        />
+      </head>
       <body>
         <Provider>
         <div className='main'>
