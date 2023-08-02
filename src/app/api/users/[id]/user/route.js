@@ -3,11 +3,11 @@ import User from "@/models/user";
 
 export const GET = async (request, { params }) => {
     try {
+
         await connectToDB();
 
-        const user = await User.findOne({
-            id: params.id
-        });
+        const user = await User.findById(params.id);
+        
         return new Response(JSON.stringify(user), {
             status: 200
         });
@@ -23,9 +23,7 @@ export const PATCH = async (request, { params }) => {
     
     try {
         await connectToDB();
-        const existingUser = await User.findOne({
-            id: params.id
-        });
+        const existingUser = await User.findById(params.id);
 
         if(!existingUser) return new Response("User not found", {
             status: 404

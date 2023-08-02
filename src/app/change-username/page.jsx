@@ -16,9 +16,8 @@ export default function ChangeUsername({ params }) {
         const res = await fetch(`/api/users/${session?.user.id}/user`);
         const data = await res.json();
         setUser(data);
-        console.log(user);
     }
-    
+
     const handleUsernameChange = async (e) => {
         e.preventDefault()
         setIsSubmitting(true);
