@@ -27,7 +27,7 @@ export const PATCH = async (request, { params }) => {
             id: params.id
         });
 
-        if(!existingUser) return new Response("Post not found", {
+        if(!existingUser) return new Response("User not found", {
             status: 404
         })
 
@@ -39,7 +39,7 @@ export const PATCH = async (request, { params }) => {
             status: 200
         })
     } catch (error) {
-        return new Response("Failed to update this post", {
+        return new Response("Failed to update this username", {
             status: 500
         })
     }

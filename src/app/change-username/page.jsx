@@ -3,9 +3,10 @@
 import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 export default function ChangeUsername({ params }) {
-
+    const router = useRouter();
     const { data:session } = useSession();
 
     const [submitting, setIsSubmitting] = useState(false);
@@ -17,13 +18,12 @@ export default function ChangeUsername({ params }) {
         setUser(data);
         console.log(user);
     }
-    // TODO: fix usernamechange
+    
     const handleUsernameChange = async (e) => {
-
-        e.preventDefault();
+        e.preventDefault()
         setIsSubmitting(true);
 
-        if(!user.id) {
+        if(!user._id) {
             return alert("User ID not found");
         }
 
@@ -52,7 +52,7 @@ export default function ChangeUsername({ params }) {
     return(
         <section className='w-full max-w-full flex-center flex-col'>
             <form 
-            onSubmit={handleUsernameChange(user)}
+            onSubmit={handleUsernameChange}
             className='mt-10 w-full max-w-2xl flex flex-col gap-7 glassmorphism'
             >
                 <label>
