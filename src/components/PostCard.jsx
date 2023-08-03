@@ -59,6 +59,7 @@ export default function PostCard({ post, handleTagClick, handleEdit, handleDelet
                         }
                         width={12}
                         height={12}
+                        alt='copyIcon'
                     />
                 </div>
             </div>

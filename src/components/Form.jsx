@@ -26,7 +26,7 @@ export default function Form ({ type, post, setPost, submitting, handleSubmit })
                     <label>
                         <span className='font-satoshi font-semibold text-base text-gray-700'>
                             Tag
-                            <span className='font-normal'> (#soup, #vegetables, #drink) seperate each tag with ", "</span>
+                            <span className='font-normal'> {`(#soup, #vegetables, #drink) seperate each tag with ", "`}</span>
                         </span>
 
                         <input value={post.tag} onChange={(e) => setPost({...post, tag: e.target.value})} placeholder='#anytagofyourchoice' required className='form_input'/>
