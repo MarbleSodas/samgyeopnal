@@ -17,6 +17,7 @@ const PostCardList = ({ data, handleTagClick }) => {
 }
 
 export default function Feed() {
+    const [domLoaded, setDomLoaded] = useState(false);
     const [searchText, setSearchText] = useState("");
     const [searchTimeout, setSearchTimeout] = useState(null);
     const [searchedResults, setSearchedResults] = useState([]);
@@ -61,22 +62,27 @@ export default function Feed() {
     
     useEffect(() => {
         fetchPosts();
+        setDomLoaded(true);
     },[])
 
     return (
-        <section className='feed'>
-            <form className='relative w-full flex-center'>
-                <input type='text' placeholder='Search for a tag or username' value={searchText} onChange={handleSearchChange} required className='search_input peer'/>
-            </form>
-            
-            {searchText ? (
-                <PostCardList
-                data={searchedResults}
-                handleTagClick={handleTagClick}
-                />
-            ) : (
-                <PostCardList data={posts} handleTagClick={handleTagClick} />
-            )}
-        </section>
+        <>
+        {domLoaded &&(
+            <section className='feed'>
+                <form className='relative w-full flex-center'>
+                    <input type='text' placeholder='Search for a tag or username' value={searchText} onChange={handleSearchChange} required className='search_input peer'/>
+                </form>
+                
+                {searchText ? (
+                    <PostCardList
+                    data={searchedResults}
+                    handleTagClick={handleTagClick}
+                    />
+                ) : (
+                    <PostCardList data={posts} handleTagClick={handleTagClick} />
+                )}
+            </section>
+        )}
+        </>
     )
 }
