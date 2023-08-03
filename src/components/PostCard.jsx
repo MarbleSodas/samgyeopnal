@@ -13,6 +13,9 @@ export default function PostCard({ post, handleTagClick, handleEdit, handleDelet
 
     const [copied, setCopied] = useState("");
 
+    const tagSplit = (post) => {
+        return post.tag.split(", ");
+    }
 
     // Change to share link
     const handleCopy = () => {
@@ -62,11 +65,16 @@ export default function PostCard({ post, handleTagClick, handleEdit, handleDelet
             <p className='my-4 font-satoshi text-sm text-gray-700'>
                 {post.recipe}
             </p>
-            <p className='font-inter text-sm blue_gradient cursor-pointer'
-            onClick={() => handleTagClick && handleTagClick(post.tag)}
-            >
-                {post.tag}
-            </p>
+
+            <div className='flex flex-wrap gap-3'>
+                {tagSplit(post).map((tag, index) => (
+                    <p key={index} className='font-inter text-sm blue_gradient cursor-pointer'
+                    onClick={() => handleTagClick && handleTagClick(tag)}
+                    >
+                        {tag}
+                    </p>
+                ))}
+            </div>
             {session?.user.id === post.creator._id && pathName === "/profile" && (
                 <div className='mt-5 flex-center gap-4 border-t border-gray-100 pt-3'>
                     <p

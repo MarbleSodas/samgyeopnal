@@ -21,12 +21,12 @@ export default function Form ({ type, post, setPost, submitting, handleSubmit })
                             Your Recipe
                         </span>
 
-                        <textarea value={post.recipe} onChange={(e) => setPost({...post,recipe: e.target.value})} placeholder='Enter the Recipe step by step here!' required className='form_textarea'/>
+                        <textarea value={post.recipe} onChange={(e) => setPost({...post, recipe: e.target.value})} placeholder='Enter the Recipe step by step here!' required className='form_textarea'/>
                     </label>
                     <label>
                         <span className='font-satoshi font-semibold text-base text-gray-700'>
                             Tag
-                            <span className='font-normal'> (#soup, #vegetables, #drink) just one tag per post</span>
+                            <span className='font-normal'> (#soup, #vegetables, #drink) seperate each tag with ", "</span>
                         </span>
 
                         <input value={post.tag} onChange={(e) => setPost({...post, tag: e.target.value})} placeholder='#anytagofyourchoice' required className='form_input'/>

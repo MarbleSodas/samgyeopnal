@@ -19,7 +19,7 @@ const EditPost = () => {
             const data = await res.json();
             setPost({
                 recipe: data.recipe,
-                tag: data.tag
+                tag: data.tag,
             })
         }
         if(postId) getPostDetails();
