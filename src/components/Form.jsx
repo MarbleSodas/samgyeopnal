@@ -2,23 +2,10 @@
 
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
-import axios from 'axios';
 import Dropimage from './Dropimage';
 
 export default function Form ({ type, post, setPost, submitting, handleSubmit }){
-    const { data: session } = useSession();
-
-    const handleFileSelected = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-          const reader = new FileReader();
-          reader.onloadend = async () => {
-            const imageBase64 = reader.result;
-              setPost({ ...post, image: imageBase64 });
-          };
-          reader.readAsDataURL(file);
-        }
-      };
+    // const { data: session } = useSession();
 
         return (
             <section className='w-full max-w-full flex-start flex-col'>
@@ -38,13 +25,11 @@ export default function Form ({ type, post, setPost, submitting, handleSubmit })
                         <span className='font-satoshi font-semibold text-base text-gray-700'>
                             Image
                         </span>
-                        <Dropimage className='p-16 mt-10 border border-dashed rounded-xl border-neutral-300 font-inter text-center'
+                        <Dropimage className='p-16 mt-10 border border-dashed rounded-xl border-neutral-300 font-inter text-center justify-center'
                         post={post}
                         setPost={setPost}
                         />
                     </label>
-
-                    {post.imageRaw && <img src={post.imageRaw} alt="Preview" />}
 
                     <label>
                         <span className='font-satoshi font-semibold text-base text-gray-700'>

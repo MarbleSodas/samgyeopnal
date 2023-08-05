@@ -11,7 +11,7 @@ const CreatePost = () => {
   const { data: session } = useSession();
 
   const [submitting, setIsSubmitting] = useState(false);
-  const [post, setPost] = useState({ recipe: "", tag: "" });
+  const [post, setPost] = useState({ recipe: "", tag: "", image: []});
 
   const createPost = async (e) => {
     e.preventDefault();
