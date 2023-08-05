@@ -6,37 +6,19 @@ import axios from 'axios';
 import Dropimage from './Dropimage';
 
 export default function Form ({ type, post, setPost, submitting, handleSubmit }){
-    // const { data: session } = useSession();
+    const { data: session } = useSession();
 
-    // const handleFileSelected = (e) => {
-    //     const file = e.target.files[0];
-    //     if (file) {
-    //       const reader = new FileReader();
-    //       reader.onloadend = async () => {
-    //         const imageBase64 = reader.result;
-    //         try {
-    //           const response = await axios.post(
-    //             'https://photoslibrary.googleapis.com/v1/uploads',
-    //             imageBase64,
-    //             {
-    //               headers: {
-    //                 Authorization: `Bearer ${session.accessToken}`,
-    //                 'Content-type': 'application/octet-stream',
-    //                 'X-Goog-Upload-Content-Type': file.type,
-    //                 'X-Goog-Upload-Protocol': 'raw',
-    //               },
-    //             }
-    //           );
-    //           const uploadToken = response.data;
-    //           console.log('uploadToken', uploadToken);
-    //           setPost({ ...post, image: uploadToken, imageRaw: imageBase64 });
-    //         } catch (error) {
-    //           console.error('Error uploading image to Google Photos API', error);
-    //         }
-    //       };
-    //       reader.readAsDataURL(file);
-    //     }
-    //   };
+    const handleFileSelected = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onloadend = async () => {
+            const imageBase64 = reader.result;
+              setPost({ ...post, image: imageBase64 });
+          };
+          reader.readAsDataURL(file);
+        }
+      };
 
         return (
             <section className='w-full max-w-full flex-start flex-col'>
