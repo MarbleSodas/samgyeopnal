@@ -1,21 +1,24 @@
 'use client';
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { useSession } from 'next-auth/react'
 import Dropimage from './Dropimage';
+import ReactCrop from 'react-image-crop';
+import { useState } from 'react';
+import 'react-image-crop/dist/ReactCrop.css'
 
 export default function Form ({ type, post, setPost, submitting, handleSubmit }){
     // const { data: session } = useSession();
+    const [crop, setCrop] = useState({ aspect: 16 / 9 });
+    const [file, setFile] = useState([]);
 
         return (
-            <section className='w-full max-w-full flex-start flex-col'>
+            <section className='w-full max-w-full flex-start flex-col mb-20'>
                 <h1 className='head_text text-left'>
                    <span className='blue_gradient'>{type} Post</span> 
                 </h1>
-                <p className='desc text-left max-w-md'>
-                    {type} and share delicious recipes with everyone here!
-                </p>
-
+                
                 <form 
                 onSubmit={handleSubmit}
                 className='mt-10 w-full max-w-2xl flex flex-col gap-7 glassmorphism'
@@ -24,11 +27,21 @@ export default function Form ({ type, post, setPost, submitting, handleSubmit })
                     <label>
                         <span className='font-satoshi font-semibold text-base text-gray-700'>
                             Image
+                            <span className='font-normal'> {`(for optimal image cropping, use 16:9 aspect ratio)`}</span>
                         </span>
-                        <Dropimage className='p-16 mt-10 border border-dashed rounded-xl border-neutral-300 font-inter text-center justify-center'
+                        <Dropimage className='p-2 mt-10 border border-dashed rounded-xl border-neutral-300 font-inter text-center justify-center flex'
                         post={post}
                         setPost={setPost}
+                        file={file}
+                        setFile={setFile}
                         />
+                        {/* { file.preview &&
+                        <div className='justify-center'>
+                            <ReactCrop crop={crop} onChange={(c, percentCrop) => setCrop(c)}>
+                                <Image alt={file.name} src={file.preview} width={200} height={200} />
+                            </ReactCrop>
+                        </div>
+                        } */}
                     </label>
 
                     <label>

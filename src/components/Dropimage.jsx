@@ -1,9 +1,10 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState, useRef } from "react";
 import { useDropzone } from "react-dropzone";
 import Image from 'next/image';
+import ReactCrop from 'react-image-crop'
+import 'react-image-crop/dist/ReactCrop.css'
 
-const Dropimage = ({ className, post, setPost }) => {
-    const [file, setFile] = useState([]);
+const Dropimage = ({ className, post, setPost, file, setFile }) => {
 
     const onDrop = useCallback((acceptedFiles) => {
         if (acceptedFiles?.length) {
@@ -28,14 +29,13 @@ const Dropimage = ({ className, post, setPost }) => {
             <div {...getRootProps({ className: className })}>
             <input {...getInputProps()} />
             {file.preview ? (
-            <div className="text-center">
-                <Image alt={file.name} src={file.preview} width={100} height={100} />
-                <p>{file.name}</p>
+            <div className="text-center justify-center">
+                <Image alt={file.name} src={file.preview} width={200} height={200} />
             </div>
             ) :
                 isDragActive ?
-                <p>Drop the files here ...</p> :
-                <p>{`Drag 'n' drop some files here, or click to select files`}</p>
+                <p className="p-14">Drop the files here ...</p> :
+                <p className="p-14">{`Drag 'n' drop some files here, or click to select files`}</p>
             }
             </div>
 
