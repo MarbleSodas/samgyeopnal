@@ -7,10 +7,10 @@ import Dropimage from './Dropimage';
 import ReactCrop from 'react-image-crop';
 import { useState } from 'react';
 import 'react-image-crop/dist/ReactCrop.css'
+import ImageCropper from './ImageCropper';
 
 export default function Form ({ type, post, setPost, submitting, handleSubmit }){
     // const { data: session } = useSession();
-    const [crop, setCrop] = useState({ aspect: 16 / 9 });
     const [file, setFile] = useState([]);
 
         return (
@@ -29,12 +29,13 @@ export default function Form ({ type, post, setPost, submitting, handleSubmit })
                             Image
                             <span className='font-normal'> {`(for optimal image cropping, use 16:9 aspect ratio)`}</span>
                         </span>
-                        <Dropimage className='p-2 mt-10 border border-dashed rounded-xl border-neutral-300 font-inter text-center justify-center flex'
+                        { file.preview ? <ImageCropper file={file} setFile={setFile}/>
+                        : <Dropimage className='p-2 mt-10 border border-dashed rounded-xl border-neutral-300 font-inter text-center justify-center flex'
                         post={post}
                         setPost={setPost}
                         file={file}
                         setFile={setFile}
-                        />
+                        />}
                         {/* { file.preview &&
                         <div className='justify-center'>
                             <ReactCrop crop={crop} onChange={(c, percentCrop) => setCrop(c)}>
